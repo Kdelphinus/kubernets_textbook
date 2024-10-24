@@ -27,3 +27,14 @@ spec:
         - name: web
           image: adminer:4.7-standalone
           args: ["php", "-S", "0.0.0.0:8080", "-t", "/var/www/html"]
+          env:
+            - name: ADMINER_DESIGN
+              valueFrom:
+                configMapKeyRef:
+                  name: adminer-config
+                  key: ADMINER_DESIGN
+            - name: ADMINER_DEFAULT_SERVER
+              valueFrom:
+                secretKeyRef:
+                  name: adminer-secret
+                  key: ADMINER_DEFAULT_SERVER
